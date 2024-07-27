@@ -6,7 +6,7 @@ setDocDimensions(canvasSize.x, canvasSize.y);
 const charSize = { x: 5, y: 10 }; 
 const charSpacing = { x: 1, y: 1 };
 
-const text = "babaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb";
+const input = "baba aaaa aaa aa a\naaaaaa aa aaaa aaaaaa\naaaa aabbbb";
 
 // Define your own font here, with the characters you want to draw as keys and the lines you want to draw as values
 const font = {
@@ -35,18 +35,34 @@ const font = {
     w: [],
     x: [],
     y: [],
-    z: []
+    z: [],
+    ' ':[]
 };
 
 var outputLines = [];
 
-for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    const lines = font[char];
-    const x = i * (charSize.x + charSpacing.x) % canvasSize.x;
-    const y = Math.floor(i * (charSize.x + charSpacing.x) / canvasSize.x) * -(charSize.y + charSpacing.y) + canvasSize.y - charSize.y;
+const textLines = input.split("\n");
 
-    outputLines.push(...lines.map(line => line.map(point => [point[0] + x, point[1] + y])));
+for(let i = 0; i < textLines.length; i++) {
+    const textLine = textLines[i];
+    const width = calculateTextWidth(textLine);
+    const x = 0;
+    const y = canvasSize.y - charSize.y - i * (charSize.y + charSpacing.y);
+    writeTextAtPosition(textLine, {x, y});
 }
 
 drawLines(outputLines);
+
+function calculateTextWidth(text) {
+    return text.length * (charSize.x + charSpacing.x);
+}
+
+function writeTextAtPosition(text, position) {
+    for(let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const lines = font[char];
+        const x = position.x + i * (charSize.x + charSpacing.x);
+        const y = position.y;
+        outputLines.push(...lines.map(line => line.map(point => [point[0] + x, point[1] + y])));
+    }
+}

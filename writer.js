@@ -1,4 +1,4 @@
-// write wth your own font and write with it!!
+// write with your own font!!
 const width = 125;
 const height = 125;
 

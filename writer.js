@@ -46,7 +46,7 @@ for (let i = 0; i < text.length; i++) {
     const x = i * (charSize.x + charSpacing.x);
     const y = 0;
 
-    outputLines.push(...lines);
+    outputLines.push(...lines.map(line => line.map(point => [point[0] + x, point[1] + y])));
 }
 
 drawLines(outputLines);

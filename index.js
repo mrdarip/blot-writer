@@ -1,3 +1,8 @@
+/*
+@title: Blot writer
+@author: mrdarip
+*/
+
 // write with your own font!!
 // I made my font with inkscape, setting the document size to 5x10 mm and writting the characters I wanted to draw
 // Then I exported the SVG of each character and copied the polylines to the font object below

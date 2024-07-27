@@ -3,10 +3,10 @@ const canvasSize = { x: 125, y: 125 };
 
 setDocDimensions(canvasSize.x, canvasSize.y);
 
-const charSize = { x: 5, y: 5 }; 
+const charSize = { x: 5, y: 10 }; 
 const charSpacing = { x: 1, y: 1 };
 
-const text = "abc";
+const text = "babaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb";
 
 // Define your own font here, with the characters you want to draw as keys and the lines you want to draw as values
 const font = {
@@ -43,8 +43,8 @@ var outputLines = [];
 for (let i = 0; i < text.length; i++) {
     const char = text[i];
     const lines = font[char];
-    const x = i * (charSize.x + charSpacing.x);
-    const y = 0;
+    const x = i * (charSize.x + charSpacing.x) % canvasSize.x;
+    const y = Math.floor(i * (charSize.x + charSpacing.x) / canvasSize.x) * -(charSize.y + charSpacing.y) + canvasSize.y - charSize.y;
 
     outputLines.push(...lines.map(line => line.map(point => [point[0] + x, point[1] + y])));
 }
